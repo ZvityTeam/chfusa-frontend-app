@@ -20,7 +20,7 @@ function App() {
         <Route path="/events" element={<ComingSoonPage />} />
         <Route path="/contribute" element={<ContributePage />} />
         <Route path="/profile" element={<ComingSoonPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/contact" element={<ComingSoonPage />} />
         <Route path="/events" element={<ComingSoonPage />} />
         <Route path="/profile" element={<ComingSoonPage />} />
         <Route path="/contact" element={<ComingSoonPage />} />
