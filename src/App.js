@@ -7,23 +7,28 @@ import HeaderComponent from "./components/Header/HeaderComponent";
 import ProjectsPage from "./pages/ProjectsPage";
 import ContributePage from "./pages/ContributePage";
 import ProfilePage from "./pages/ProfilePage";
+import ComingSoonPage from "./pages/ComingSoonPage";
 
 function App() {
   return (
-    <main className="min-h-screen" >
+    < >
       <HeaderComponent />
-      <>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/contribute" element={<ContributePage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
-      </>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/projects" element={<ComingSoonPage />} />
+        <Route path="/events" element={<ComingSoonPage />} />
+        <Route path="/contribute" element={<ContributePage />} />
+        <Route path="/profile" element={<ComingSoonPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/events" element={<ComingSoonPage />} />
+        <Route path="/profile" element={<ComingSoonPage />} />
+        <Route path="/contact" element={<ComingSoonPage />} />
+        <Route path="/donate" element={<ComingSoonPage />} />
+        <Route path="/join" element={<ComingSoonPage />} />
+      </Routes>
       <FooterComponent />
-    </main>
+    </>
   );
 }
 

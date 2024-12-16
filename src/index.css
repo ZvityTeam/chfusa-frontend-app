@@ -1,3 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Serif Display', serif;
+  }
+  body {
+    font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+  }
+}
+
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+}
+
+.logo-container {
+  position: absolute;
+  width: 150px;
+  height: 111px;
+  background: #FFFFFF;
+  border-radius: 0 72px 72px 0;
+  transform: rotate(90deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 150px;
+  height: 99px;
+  transform: rotate(-90deg);
+  object-fit: contain;
+  padding: 0 30px;
+}
+
+.hero-bg{
+opacity: 0.9;
+backdrop-filter: blur(3px);
+-webkit-backdrop-filter: blur(3px);
+}
+
+.programs-card{
+  background: transparent linear-gradient(180deg, #000000 0%, #00000000 100%) 0% 0% no-repeat padding-box;
+}
+
+.digit-separator::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 2rem;
+  background-color: #d1d5db;
+}
