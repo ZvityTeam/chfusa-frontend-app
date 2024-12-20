@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="87" height="87" viewBox="0 0 87 87">
+  <g id="Group_163" data-name="Group 163" transform="translate(-917 -959)">
+    <g id="Ellipse_33" data-name="Ellipse 33" transform="translate(917 959)" fill="#fff" stroke="#e67e22" stroke-width="4">
+      <circle cx="43.5" cy="43.5" r="43.5" stroke="none"/>
+      <circle cx="43.5" cy="43.5" r="41.5" fill="none"/>
+    </g>
+    <g id="Group_162" data-name="Group 162">
+      <rect id="Rectangle_120" data-name="Rectangle 120" width="6" height="17" rx="3" transform="translate(948 994)" fill="#e67e22"/>
+      <rect id="Rectangle_121" data-name="Rectangle 121" width="6" height="21" rx="3" transform="translate(953 989)" fill="#e67e22"/>
+      <rect id="Rectangle_122" data-name="Rectangle 122" width="5" height="25" rx="2.5" transform="translate(958 984)" fill="#e67e22"/>
+      <rect id="Rectangle_123" data-name="Rectangle 123" width="6" height="20" rx="3" transform="translate(962 989)" fill="#e67e22"/>
+      <rect id="Rectangle_124" data-name="Rectangle 124" width="6" height="14" rx="3" transform="translate(966 998)" fill="#e67e22"/>
+      <ellipse id="Ellipse_34" data-name="Ellipse 34" cx="11.5" cy="10.5" rx="11.5" ry="10.5" transform="translate(949 998)" fill="#e67e22"/>
+    </g>
+    <g id="Group_161" data-name="Group 161">
+      <path id="Path_3442" data-name="Path 3442" d="M15.434,0a3.41,3.41,0,0,0-3.391,3.391V4.729a3.323,3.323,0,0,0-1.13-.208A3.41,3.41,0,0,0,7.521,7.913V9.251a3.323,3.323,0,0,0-1.13-.208A3.41,3.41,0,0,0,3,12.434v11.3a12.434,12.434,0,1,0,24.868,0V16.955a3.41,3.41,0,0,0-3.391-3.391,3.323,3.323,0,0,0-1.13.208V7.913a3.41,3.41,0,0,0-3.391-3.391,3.323,3.323,0,0,0-1.13.208V3.391A3.41,3.41,0,0,0,15.434,0Zm0,2.261a1.1,1.1,0,0,1,1.13,1.13V18.086h2.261V7.913a1.13,1.13,0,1,1,2.261,0V21.477h2.261V16.955a1.13,1.13,0,0,1,2.261,0v6.782a10.173,10.173,0,1,1-20.347,0v-11.3a1.13,1.13,0,1,1,2.261,0v5.652H9.782V7.913a1.13,1.13,0,0,1,2.261,0V18.086H14.3V3.391A1.1,1.1,0,0,1,15.434,2.261Z" transform="translate(945 983.623)" fill="#fff" stroke="#e67e22" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

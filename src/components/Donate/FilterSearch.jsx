@@ -16,12 +16,12 @@ export default function FilterSearch() {
       <div className="flex justify-end items-center gap-4">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-4 py-2"
+          className="flex items-center gap-2 px-4 py-2 italic text-gray-600"
         >
-          <span className="text-primary">≡</span> Filter & Search
+          <span className="text-primary"><img src={"/assets/images/filter.svg"} className='h-5 w-5'/></span> Filter & Search
         </button>
         <button className="text-gray-600 hover:text-primary flex items-center gap-2">
-          Default Donation <span className="w-5 h-5 rounded border border-gray bg-gray flex items-center justify-center">✓</span>
+          Default Donation <span className="w-5 h-5 rounded border border-gray bg-[#D3D3D3] flex items-center justify-center">✓</span>
         </button>
       </div>
 

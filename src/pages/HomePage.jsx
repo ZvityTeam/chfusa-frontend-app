@@ -10,7 +10,7 @@ import FAQSection from '../sections/FAQSection';
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-cream">
-      <HeroSection />
+      <HeroSection  from="home"/>
       <VisionSection />
       <ProgramsSection />
       <FeaturedProjectsSeton />
