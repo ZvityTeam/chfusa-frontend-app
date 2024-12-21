@@ -11,6 +11,8 @@ import { useContext, useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import ElementsWrapper from "./pages/payment/ElementsWrapper";
 import CheckoutForm from './pages/payment/CheckoutForm';
+import ProjectsPage from "./pages/ProjectsPage";
+import EventPage from "./pages/EventPage";
 function App() {
   const [StripeOptions, setStripeOptions] = useState({ appearance: { theme: 'stripe' }, loader: 'auto' })
   const { data } = useContext(DataContext);
@@ -27,8 +29,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/projects" element={<ComingSoonPage />} />
-        <Route path="/events" element={<ComingSoonPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/events" element={<EventPage />} />
         <Route path="/contribute" element={<ContributePage />}>
           {
             StripeOptions?.clientSecret ?

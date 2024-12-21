@@ -37,13 +37,15 @@ const projects = [
   }
 ]
 
-export default function FeaturedProjectsSeton() {
+export default function FeaturedProjectsSeton({
+  title = "Featured Projects",
+}) {
   const [hoveredId, setHoveredId] = useState(null)
 
   return (
     <div className="p-8 mx-14">
-      <h2 className="mb-8 text-4xl font-display text-gray-900">Featured Projects</h2>
-      
+      <h2 className="mb-8 text-4xl font-display text-gray-900">{title}</h2>
+
       <table className="w-full">
         <thead>
           <tr className="border-b border-gray-500 text-sm text-gray-600">
@@ -56,7 +58,7 @@ export default function FeaturedProjectsSeton() {
         <tbody>
           {projects.map((project) => {
             const isHovered = project.id === hoveredId;
-            
+
             return (
               <tr
                 key={project.id}
@@ -65,25 +67,28 @@ export default function FeaturedProjectsSeton() {
                 onMouseLeave={() => setHoveredId(null)}
               >
                 <td className="py-7">
-                  <span className={`text-lg font-medium transition-colors duration-200 ${
-                    isHovered ? 'text-secondary' : 'text-gray-900'
-                  }`}>
+                  <span
+                    className={`text-lg font-medium transition-colors duration-200 ${isHovered ? "text-secondary" : "text-gray-900"
+                      }`}
+                  >
                     {project.title}
                   </span>
                 </td>
                 <td>
-                  <span className={`inline-flex rounded-full px-4 py-1 text-sm transition-all duration-200 ${
-                    isHovered 
-                      ? 'bg-secondary text-white border border-secondary' 
-                      : 'border border-gray-500 text-gray-600'
-                  }`}>
+                  <span
+                    className={`inline-flex rounded-full px-4 py-1 text-sm transition-all duration-200 ${isHovered
+                        ? "bg-secondary text-white border border-secondary"
+                        : "border border-gray-500 text-gray-600"
+                      }`}
+                  >
                     {project.tag}
                   </span>
                 </td>
                 <td>
-                  <span className={`text-lg transition-colors duration-200 ${
-                    isHovered ? 'text-secondary' : 'text-gray-600'
-                  }`}>
+                  <span
+                    className={`text-lg transition-colors duration-200 ${isHovered ? "text-secondary" : "text-gray-600"
+                      }`}
+                  >
                     {project.status}
                   </span>
                 </td>
@@ -97,14 +102,15 @@ export default function FeaturedProjectsSeton() {
                             className="absolute"
                             style={{
                               right: `${index * 60}px`,
-                              transform: index === 1 ? 'rotate(6deg)' : 'rotate(-3deg)',
-                              zIndex: project.images.length - index
+                              transform:
+                                index === 1 ? "rotate(6deg)" : "rotate(-3deg)",
+                              zIndex: project.images.length - index,
                             }}
                           >
                             <div className="h-20 w-28 overflow-hidden rounded-lg border-2 border-white shadow-md">
                               <img
                                 src={image}
-                                alt={`${project.title}  ${index + 1}`}
+                                alt={`${project.title} image ${index + 1}`}
                                 className="h-full w-full object-cover"
                               />
                             </div>
@@ -112,28 +118,26 @@ export default function FeaturedProjectsSeton() {
                         ))}
                       </div>
                     )}
-                    <button 
-                      className={`rounded-full p-2 transition-all duration-200 ${
-                        isHovered 
-                          ? 'bg-secondary border border-secondary text-white' 
-                          : 'border border-gray-200 text-gray-400'
-                      }`}
+                    <button
+                      className={`rounded-full p-2 transition-all duration-200 ${isHovered
+                          ? "bg-secondary border border-secondary text-white"
+                          : "border border-gray-200 text-gray-400"
+                        }`}
                     >
                       <ArrowUpRight className="h-5 w-5" />
                     </button>
-                    <button 
-                      className={`rounded-full p-2 transition-all duration-200 ${
-                        isHovered 
-                          ? 'bg-secondary border border-secondary text-white' 
-                          : 'border border-gray-200 text-gray-400'
-                      }`}
+                    <button
+                      className={`rounded-full p-2 transition-all duration-200 ${isHovered
+                          ? "bg-secondary border border-secondary text-white"
+                          : "border border-gray-200 text-gray-400"
+                        }`}
                     >
                       <Heart className="h-5 w-5" />
                     </button>
                   </div>
                 </td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>

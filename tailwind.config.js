@@ -15,23 +15,28 @@ export default {
         'body': ['"Helvetica Now"', 'Helvetica', 'Arial', 'sans-serif'],
       },
       animation: {
-        'marquee-up': 'marquee-up var(--duration) linear infinite',
-        'marquee-down': 'marquee-down var(--duration) linear infinite',
-        'marquee': 'marquee var(--duration) linear infinite',
+        "marquee-up": "marquee-up var(--duration) linear infinite",
+        "marquee-down": "marquee-down var(--duration) linear infinite",
+        "marquee-reverse": "marquee-reverse var(--duration) linear infinite",
+        marquee: "marquee var(--duration) linear infinite",
       },
       keyframes: {
-        'marquee-up': {
-          '0%': { transform: 'translateY(0)' },
-          '100%': { transform: 'translateY(calc(-100% - var(--gap)))' }
+        "marquee-up": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(calc(-100% - var(--gap)))" },
         },
-        'marquee-down': {
-          '0%': { transform: 'translateY(calc(-100% - var(--gap)))' },
-          '100%': { transform: 'translateY(0)' }
+        "marquee-down": {
+          "0%": { transform: "translateY(calc(-100% - var(--gap)))" },
+          "100%": { transform: "translateY(0)" },
         },
-        'marquee': {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(calc(-100% - var(--gap)))' }
-        }
+        "marquee-reverse": {
+          "0%": { transform: "translateX(calc(-100% - var(--gap)))" },
+          "100%": { transform: "translateX(0)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
       },
     },
   },
