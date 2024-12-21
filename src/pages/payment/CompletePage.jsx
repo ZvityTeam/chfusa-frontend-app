@@ -3,6 +3,8 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import "./PaymentPage.css";
+import ApiCalling from '../../components/api/ApiCalling';
+import { toast } from "react-toastify";
 
 const SuccessIcon =
   <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,9 +75,71 @@ export default function CompletePage() {
       if (!paymentIntent) {
         return;
       }
-
+      console.log("paymentIntent", paymentIntent);
       setStatus(paymentIntent.status);
       setIntentId(paymentIntent.id);
+      /**
+       * 
+       * {
+  "id": "pi_3QYK1VD1HGHWO4740ND4dGmy",
+  "object": "payment_intent",
+  "amount": 485,
+  "amount_details": {
+    "tip": {}
+  },
+  "automatic_payment_methods": {
+    "allow_redirects": "always",
+    "enabled": true
+  },
+  "canceled_at": null,
+  "cancellation_reason": null,
+  "capture_method": "automatic_async",
+  "client_secret": "pi_3QYK1VD1HGHWO4740ND4dGmy_secret_xlOmYF0GluGDZwGZOla4g2lnR",
+  "confirmation_method": "automatic",
+  "created": 1734754241,
+  "currency": "usd",
+  "description": null,
+  "last_payment_error": null,
+  "livemode": false,
+  "next_action": null,
+  "payment_method": "pm_1QYK1jD1HGHWO4740kDoSnsx",
+  "payment_method_configuration_details": {
+    "id": "pmc_1QX2FFD1HGHWO474zTuz2MgL",
+    "parent": null
+  },
+  "payment_method_types": [
+    "card",
+    "link",
+    "paypal"
+  ],
+  "processing": null,
+  "receipt_email": null,
+  "setup_future_usage": null,
+  "shipping": null,
+  "source": null,
+  "status": "succeeded"
+}
+       */
+      // Initialize UserSessionData with an empty object or handle it safely
+      let UserSessionData = {};  // Use let instead of const
+
+      try {
+        const storedData = sessionStorage.getItem("formdata");
+        if (storedData) {
+          UserSessionData = JSON.parse(storedData);
+        }
+      } catch (error) {
+        console.error('Error parsing sessionStorage data', error);
+      }
+
+      const userData = {
+        ...UserSessionData
+      }
+      // ApiCalling("/submitForm", "POST", userData).then(() => {
+      toast.success("Payment successfully Done!");
+      // }).catch(err => {
+      //   toast.error(err.message)
+      // });
     });
   }, [stripe]);
 
@@ -88,26 +152,26 @@ export default function CompletePage() {
       <h2 id="status-text">{STATUS_CONTENT_MAP[status].text}</h2>
       {intentId &&
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
-                  ID
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  {intentId}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b border-gray-200 dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
-                >Status</th>
-                <td className="px-6 py-4">{status}</td>
-              </tr>
-            </tbody>
-          </table>
+          <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
+            <tr>
+              <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                ID
+              </th>
+              <th scope="col" className="px-6 py-3">
+                {intentId}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b border-gray-200 dark:border-gray-700">
+              <th
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+              >Status</th>
+              <td className="px-6 py-4">{status}</td>
+            </tr>
+          </tbody>
+        </table>
       }
       {intentId && <a href={`https://dashboard.stripe.com/payments/${intentId}`} id="view-details" rel="noopener noreferrer" target="_blank">View details
         <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ paddingLeft: '5px' }}>

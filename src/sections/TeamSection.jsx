@@ -45,10 +45,6 @@ const reviews = [
     img: "https://avatar.vercel.sh/john",
   },
 ];
-
-const firstRow = boardMembers.slice(0, boardMembers.length / 6);
-const secondRow = boardMembers.slice(boardMembers.length / 6);
-
 export default function TeamSection() {
   const [isHovered, setIsHovered] = useState(false)
   const containerRef = useRef(null)

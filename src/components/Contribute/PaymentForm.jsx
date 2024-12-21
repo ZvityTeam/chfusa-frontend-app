@@ -72,6 +72,9 @@ export default function PaymentForm() {
         .then((data) => {
           setData(v => ({ ...v, clientSecret: data.clientSecret }))
           sessionStorage.setItem('clientSecret', data.clientSecret)
+          // Save data to sessionStorage
+          sessionStorage.setItem('formdata', JSON.stringify(formData));
+
           navigation("checkout")
         }).catch((err) => {
           toast.error(err.message)
