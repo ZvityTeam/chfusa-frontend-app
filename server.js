@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
+require('dotenv').config();
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.
 // Sign in to see your own test API key embedded in code samples.
-const stripe = require("stripe")('sk_test_51QX2EjD1HGHWO4740PkSZeF6kW0QpepPxc8BNFLpEDEZXuIXdABA9sTEs0zAWKFJyLmNSnEPatPGqx9TlzW49gKU00UmX8e3aw');
+const stripe = require("stripe")(`${process.env.REACT_APP_STRIPE_CLIENT_SECRET}`);
+// const stripe = require("stripe")('sk_test_51QX2EjD1HGHWO4740PkSZeF6kW0QpepPxc8BNFLpEDEZXuIXdABA9sTEs0zAWKFJyLmNSnEPatPGqx9TlzW49gKU00UmX8e3aw');
+console.log("REACT_APP_STRIPE_CLIENT_SECRET",process.env.REACT_APP_STRIPE_CLIENT_SECRET);
 
 app.use(express.static("public"));
 app.use(express.json());

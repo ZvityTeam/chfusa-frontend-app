@@ -6,12 +6,13 @@ import './PaymentPage.css'
 const ElementsWrapper = ({ stripePromise, options }) => {
     const [IsModalOpen, setIsModalOpen] = useState(true)
     const location = useLocation();
+    console.log("🚀 ~ ElementsWrapper ~ location:", location)
     const ModalCloseHandler = () => {
         setIsModalOpen(false)
         sessionStorage.removeItem("clientSecret");
     }
     return (
-        <ModalComponent title='Payment Option' showCloseButton={location === '/contribute/checkout' ? false : true} isOpen={IsModalOpen} onClose={ModalCloseHandler}>
+        <ModalComponent title='Payment Option' showCloseButton={location.pathname === '/contribute/checkout' ? false : true} isOpen={IsModalOpen} onClose={ModalCloseHandler}>
             <div className='App'>
                 <Elements stripe={stripePromise} options={options}>
                     <Outlet />
