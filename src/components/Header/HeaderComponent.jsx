@@ -53,6 +53,12 @@ export default function HeaderComponent() {
       openModal()
     }
   };
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth', // Add smooth scrolling animation
+    });
+  };
   return (
     <>
       <nav className={`fixed w-full z-50 bg-gradient-to-b from-black/50 to-transparent ${scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'
@@ -84,7 +90,9 @@ export default function HeaderComponent() {
                 >
                   <IconNavLink to="javascript:void(0)" icon={User} />
                 </div>
-                <IconNavLink to="/contact" icon={Phone} />
+                <div onClick={scrollToBottom}>
+                <IconNavLink to="#" icon={Phone} />
+                </div>
                 <Link
                   to="/donate"
                   className="bg-secondary text-white px-6 py-3 rounded-full hover:bg-opacity-90 flex items-center gap-2"

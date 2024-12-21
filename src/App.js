@@ -13,6 +13,8 @@ import ElementsWrapper from "./pages/payment/ElementsWrapper";
 import CheckoutForm from './pages/payment/CheckoutForm';
 import ProjectsPage from "./pages/ProjectsPage";
 import EventPage from "./pages/EventPage";
+
+import { ToastContainer } from 'react-toastify';
 function App() {
   const [StripeOptions, setStripeOptions] = useState({ appearance: { theme: 'stripe' }, loader: 'auto' })
   const { data } = useContext(DataContext);
@@ -46,6 +48,7 @@ function App() {
         <Route path="/join" element={<ComingSoonPage />} />
       </Routes>
       <FooterComponent />
+      <ToastContainer />
     </>
   );
 }

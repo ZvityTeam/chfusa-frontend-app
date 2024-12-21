@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { Check } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { DataContext } from '../context/DataContext'
+import { toast } from 'react-toastify'
 export default function PaymentForm() {
   const totalAmount = sessionStorage.getItem("totalDonationAmount")
   const defaultForm = {
@@ -65,15 +66,17 @@ export default function PaymentForm() {
       fetch("/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items: [{...formData}] }),
+        body: JSON.stringify({ items: [{ ...formData }] }),
       })
         .then((res) => res.json())
         .then((data) => {
           setData(v => ({ ...v, clientSecret: data.clientSecret }))
           sessionStorage.setItem('clientSecret', data.clientSecret)
           navigation("checkout")
+        }).catch((err) => {
+          toast.error(err.message)
         });
-     
+
       // console.log('Form submitted:', formData)
     }
   }

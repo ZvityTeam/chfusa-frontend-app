@@ -1,14 +1,18 @@
-import { Send } from "lucide-react"
 import { useState } from "react"
+import ApiCalling from '../components/api/ApiCalling';
+import { toast } from "react-toastify";
 
 export default function NewsLettersSection() {
   const [email, setEmail] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your newsletter signup logic here
-    console.log("Email submitted:", email);
-    setEmail("");
+    ApiCalling("/newsletter", "POST", { email: email }).then((response) => {
+      setEmail("");
+      toast.success("Newsletter Successfully subscribed")
+    }).catch((error) => {
+      toast.error("Failed to Newsletter subscribed")
+      console.log(error);
+    });
   };
   return (
     <section
@@ -69,4 +73,4 @@ export default function NewsLettersSection() {
       </div>
     </section>
   );
-  }
+}

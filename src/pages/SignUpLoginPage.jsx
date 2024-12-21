@@ -2,8 +2,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import ApiCalling from '../components/api/ApiCalling';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 export default function SignUpLoginModal({ isOpen, onClose }) {
   const [view, setView] = useState('login');
+  const [FormData, setFormData] = useState({})
+  const navigate = useNavigate();
 
   const modalVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -31,8 +36,12 @@ export default function SignUpLoginModal({ isOpen, onClose }) {
               </p>
             </div>
 
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <div className="space-y-4">
               <input
+                required
+                onChange={changeHandler}
+                name='email'
+                value={FormData.email || ''}
                 type="email"
                 placeholder="Enter your registered email"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
@@ -43,7 +52,7 @@ export default function SignUpLoginModal({ isOpen, onClose }) {
               >
                 RESET PASSWORD
               </button>
-            </form>
+            </div>
 
             <div className="mt-6 text-center">
               <p>
@@ -69,33 +78,56 @@ export default function SignUpLoginModal({ isOpen, onClose }) {
               </p>
             </div>
 
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <div className="space-y-4">
               <input
+                required
+                onChange={changeHandler}
+                name='firstName'
+                value={FormData.firstName || ''}
                 type="text"
                 placeholder="First Name"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                onChange={changeHandler}
+                name='lastName'
+                value={FormData.lastName || ''}
                 type="text"
                 placeholder="Last Name"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                required
+                onChange={changeHandler}
+                name='contact'
+                value={FormData.contact || ''}
                 type="tel"
                 placeholder="Number as (999) 999-9999"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                required
+                onChange={changeHandler}
+                name='email'
+                value={FormData.email || ''}
                 type="email"
                 placeholder="Email Address"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                required
+                onChange={changeHandler}
+                name='password'
+                value={FormData.password || ''}
                 type="password"
                 placeholder="Password minimum 6 characters"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                onChange={changeHandler}
+                required
+                name='confirmPassword'
+                value={FormData.confirmPassword || ''}
                 type="password"
                 placeholder="Confirm Password"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
@@ -110,7 +142,7 @@ export default function SignUpLoginModal({ isOpen, onClose }) {
               >
                 JOIN
               </button>
-            </form>
+            </div>
 
             <div className="mt-6 text-center">
               <p>
@@ -134,13 +166,21 @@ export default function SignUpLoginModal({ isOpen, onClose }) {
               <p className="text-gray-600 mt-2">Your space to be social</p>
             </div>
 
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <div className="space-y-4">
               <input
+                required
+                onChange={changeHandler}
+                name='email'
+                value={FormData.email || ''}
                 type="email"
                 placeholder="Email Address"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                required
+                onChange={changeHandler}
+                name='password'
+                value={FormData.password || ''}
                 type="password"
                 placeholder="Password"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
@@ -152,7 +192,7 @@ export default function SignUpLoginModal({ isOpen, onClose }) {
               >
                 LOG ON
               </button>
-            </form>
+            </div>
 
             <div className="mt-6 text-center">
               <button
@@ -176,10 +216,31 @@ export default function SignUpLoginModal({ isOpen, onClose }) {
     }
   };
 
+  const changeHandler = (event) => {
+    const { name, value } = event.target;
+    setFormData(v => ({ ...v, [name]: value }))
+  }
+  const LoginFormHandler = (event) => {
+    event.preventDefault();
+    let urlPath = '/login'
+    if (view === 'register') {
+      urlPath = ''
+    } else if (view === 'reset') {
+      urlPath = ''
+    }
+    ApiCalling(urlPath, "POST", FormData).then((response) => {
+      toast.success("Successfully registered")
+      navigate("/profile")
+      sessionStorage.setItem("accessToken", response.token)
+    }).catch((error) => {
+      toast.error("Failed to register")
+      console.log(error);
+    });
+  }
   return (
     <AnimatePresence>
       {isOpen && (
-        <div style={{display:"flex",flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
+        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
           <motion.div
             className="fixed inset-0 bg-black/50 z-50"
             variants={overlayVariants}
@@ -201,8 +262,10 @@ export default function SignUpLoginModal({ isOpen, onClose }) {
             >
               <X className="h-6 w-6" />
             </button>
-
-            {renderContent()}
+            <form onSubmit={LoginFormHandler}>
+              {JSON.stringify(FormData)}
+              {renderContent()}
+            </form>
           </motion.div>
         </div>
       )}
