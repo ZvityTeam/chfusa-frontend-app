@@ -1,153 +1,213 @@
 // SignUpLoginModal.js
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
+export default function SignUpLoginModal({ isOpen, onClose }) {
+  const [view, setView] = useState('login');
 
-const SignUpLoginModal = ({ showModal, closeModal }) => {
-    const [FormInput, setFormInput] = useState({})
-    const [isSignUp, setIsSignUp] = useState(false);
+  const modalVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 20 }
+  };
 
-    const toggleForm = () => {
-        setIsSignUp(!isSignUp);
-    };
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 }
+  };
 
-    const ChangeHandler = (e) => {
-        const { name, value } = e.target;
-        setFormInput(prevState => ({ ...prevState, [name]: value }));
-    };
-    const loginFormHandler = (e) => {
-        e.preventDefault()
-    }
+  const renderContent = () => {
+    switch (view) {
+      case 'reset':
+        return (
+          <>
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-semibold text-gray-800">
+                RESET PASSWORD
+              </h2>
+              <p className="text-gray-500 mt-2">
+                Forgot your password? Let's get you a new one
+              </p>
+            </div>
 
-    return (
-        <>
-            {showModal && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
-                    onClick={closeModal}
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+              <input
+                type="email"
+                placeholder="Enter your registered email"
+                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+              />
+              <button
+                type="submit"
+                className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
+              >
+                RESET PASSWORD
+              </button>
+            </form>
+
+            <div className="mt-6 text-center">
+              <p>
+                Already have an account?{' '}
+                <button
+                  onClick={() => setView('login')}
+                  className="text-secondary hover:underline"
                 >
-                    <div
-                        className="bg-white rounded-lg p-6 w-96"
-                        onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
-                    >
-                        <div className="text-center mb-6">
-                            <h2 className="text-2xl font-bold">{isSignUp ? 'Sign Up' : 'Login'}</h2>
-                            <p className="text-sm text-gray-500">
-                                {isSignUp
-                                    ? 'Create a new account to get started.'
-                                    : 'Welcome back! Please log in.'}
-                            </p>
-                        </div>
+                  Log On
+                </button>
+              </p>
+            </div>
+          </>
+        );
 
-                        {/* Form */}
-                        <form className="space-y-4" onSubmit={loginFormHandler}>
-                            {JSON.stringify(FormInput)}
+      case 'register':
+        return (
+          <>
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-semibold text-gray-800">JOIN CHF</h2>
+              <p className="text-gray-500 mt-2">
+                We are glad you have chosen to register with us, Welcome!
+              </p>
+            </div>
 
-                            {isSignUp && (
-                                <>
-                                    <div>
-                                        <label htmlFor="username" className="block text-sm font-semibold text-gray-700">
-                                            Username
-                                        </label>
-                                        <input
-                                            onChange={ChangeHandler}
-                                            name='username'
-                                            value={FormInput.username || ''}
-                                            type="text"
-                                            id="username"
-                                            placeholder="Enter your username"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="email" className="block text-sm font-semibold text-gray-700">
-                                            Email Address
-                                        </label>
-                                        <input
-                                            onChange={ChangeHandler}
-                                            name='email'
-                                            value={FormInput.email || ''}
-                                            type="email"
-                                            id="email"
-                                            placeholder="Enter your email"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="password" className="block text-sm font-semibold text-gray-700">
-                                            Password
-                                        </label>
-                                        <input
-                                            onChange={ChangeHandler}
-                                            name='password'
-                                            value={FormInput.password || ''}
-                                            type="password"
-                                            id="password"
-                                            placeholder="Create a password"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        />
-                                    </div>
-                                </>
-                            )}
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+              <input
+                type="text"
+                placeholder="First Name"
+                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+              />
+              <input
+                type="text"
+                placeholder="Last Name"
+                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+              />
+              <input
+                type="tel"
+                placeholder="Number as (999) 999-9999"
+                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+              />
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+              />
+              <input
+                type="password"
+                placeholder="Password minimum 6 characters"
+                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+              />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+              />
+              <p className="text-sm text-gray-500">
+                Password must be 6 to 20 characters long with at least one digit, one uppercase & one lower case.
+              </p>
 
-                            {!isSignUp && (
-                                <>
-                                    <div>
-                                        <label htmlFor="email" className="block text-sm font-semibold text-gray-700">
-                                            Email Address
-                                        </label>
-                                        <input
-                                            onChange={ChangeHandler}
-                                            name='email'
-                                            value={FormInput.email || ''}
-                                            type="email"
-                                            id="email"
-                                            placeholder="Enter your email"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="password" className="block text-sm font-semibold text-gray-700">
-                                            Password
-                                        </label>
-                                        <input
-                                            onChange={ChangeHandler}
-                                            name='password'
-                                            value={FormInput.password || ''}
-                                            type="password"
-                                            id="password"
-                                            placeholder="Enter your password"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        />
-                                    </div>
-                                </>
-                            )}
+              <button
+                type="submit"
+                className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
+              >
+                JOIN
+              </button>
+            </form>
 
-                            <div className="flex justify-between items-center mt-4">
-                                <button
-                                    type="submit"
-                                    className="w-full py-2 px-4 bg-secondary text-white font-semibold  rounded-full hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                >
-                                    {isSignUp ? 'Sign Up' : 'Log In'}
-                                </button>
-                            </div>
-                        </form>
+            <div className="mt-6 text-center">
+              <p>
+                Already have an account?{' '}
+                <button
+                  onClick={() => setView('login')}
+                  className="text-secondary hover:underline"
+                >
+                  Log On
+                </button>
+              </p>
+            </div>
+          </>
+        );
 
-                        {/* Toggle Form */}
-                        <div className="mt-4 text-center">
-                            <span className="text-sm text-gray-600">
-                                {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
-                                <button
-                                    onClick={toggleForm}
-                                    className="text-blue-600 font-semibold"
-                                >
-                                    {isSignUp ? 'Log In' : 'Sign Up'}
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </>
-    );
-};
+      default: // login
+        return (
+          <>
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-semibold text-gray-800">LOG ON</h2>
+              <p className="text-gray-600 mt-2">Your space to be social</p>
+            </div>
 
-export default SignUpLoginModal;
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+              />
+
+              <button
+                type="submit"
+                className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
+              >
+                LOG ON
+              </button>
+            </form>
+
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setView('reset')}
+                className="text-gray-600 hover:text-secondary"
+              >
+                Forgot Password?
+              </button>
+              <p className="mt-4">
+                Don't have an account?{' '}
+                <button
+                  onClick={() => setView('register')}
+                  className="text-secondary hover:underline"
+                >
+                  Join CHF
+                </button>
+              </p>
+            </div>
+          </>
+        );
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div style={{display:"flex",flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
+          <motion.div
+            className="fixed inset-0 bg-black/50 z-50"
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            onClick={onClose}
+          />
+          <motion.div
+            className="fixed top-[10%] -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-8 w-full max-w-md z-50"
+            variants={modalVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <button
+              onClick={onClose}
+              className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            {renderContent()}
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+

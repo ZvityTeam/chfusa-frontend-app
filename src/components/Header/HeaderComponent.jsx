@@ -96,7 +96,7 @@ export default function HeaderComponent() {
           </div>
         </div>
       </nav>
-      <SignUpLoginModal closeModal={closeModal} showModal={showModal} />
+      <SignUpLoginModal onClose={closeModal} isOpen={showModal} />
     </>
 
   );
